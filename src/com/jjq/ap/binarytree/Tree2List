@@ -1,0 +1,77 @@
+package com.jjq.ap.binarytree;
+
+/**
+ * @author jjq
+ * @version 1.0
+ * @date 2021/5/28
+ * @desc 数转换为链表
+ * @link https://labuladong.gitbook.io/algo/mu-lu-ye-1/mu-lu-ye-1/er-cha-shu-xi-lie-1
+ */
+public class Tree2List {
+
+
+    public static void main(String[] args) {
+        BinaryTreeNode<Integer> root = buildTree();
+        invertTree(root);
+        //打印翻转后的结果
+        traverse(root);
+    }
+
+
+    public static void tree2List(BinaryTreeNode<Integer> root) {
+        System.out.println(root.getValue());
+        if (root.getLeft() !=null) {
+            traverse(root.getLeft());
+        }
+
+        if (root.getRight() !=null) {
+            traverse(root.getRight());
+        }
+    }
+
+    /**
+     * 翻转二叉树
+     */
+    public static  BinaryTreeNode<Integer> invertTree(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return null;
+        }
+        BinaryTreeNode<Integer> tmp = root.getRight();
+        root.setRight(root.getLeft());
+        root.setLeft(tmp);
+
+        invertTree(root.getLeft());
+        invertTree(root.getRight());
+        return root;
+    }
+
+
+
+    /**
+     *             1                           
+     *           /   \                      
+     *          2     5          ==>    1--2--3--4--5--6
+     *        /  \     \               
+     *       3    4     6            
+     *
+     */
+    public static  BinaryTreeNode<Integer> buildTree() {
+
+        BinaryTreeNode num1 = new BinaryTreeNode(1, null, null);
+        BinaryTreeNode num2 = new BinaryTreeNode(2, null, null);
+        BinaryTreeNode num5 = new BinaryTreeNode(5, null, null);
+        BinaryTreeNode num3 = new BinaryTreeNode(3, null, null);
+        BinaryTreeNode num4 = new BinaryTreeNode(4, null, null);
+        BinaryTreeNode num6 = new BinaryTreeNode(6, null, null);
+
+        num1.setLeft(num2);
+        num1.setRight(num5);
+
+        num2.setLeft(num3);
+        num2.setRight(num4);
+
+        num5.setRight(num6);
+        return num1;
+    }
+
+}
