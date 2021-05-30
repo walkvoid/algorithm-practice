@@ -18,7 +18,7 @@ public class Tree2List {
 
 
     /**
-     * 翻转二叉树
+     * 拉伸二叉树
      */
     public static void tree2List(BinaryTreeNode<Integer> root) {
         if (root == null) {

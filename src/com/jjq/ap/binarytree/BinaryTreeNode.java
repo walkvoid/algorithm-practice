@@ -45,9 +45,11 @@ public class BinaryTreeNode<V> {
         this.right = right;
     }
 
+
+
     @Override
     public String toString() {
-        return value.toString();
+        return String.valueOf(value);
     }
 
 }
