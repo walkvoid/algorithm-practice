@@ -19,7 +19,7 @@ public class TraverseTree {
      * @param root
      */
     public static void traverse(BinaryTreeNode<Person> root) {
-        System.out.println(root.getValue().getName());
+
         if (root.getLeft() !=null) {
             traverse(root.getLeft());
         }
@@ -27,6 +27,8 @@ public class TraverseTree {
         if (root.getRight() !=null) {
             traverse(root.getRight());
         }
+
+        System.out.println(root.getValue().getName());
     }
 
 

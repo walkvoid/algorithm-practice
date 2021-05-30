@@ -1,6 +1,8 @@
 package com.jjq.ap.binarytree;
 
 
+import java.util.Objects;
+
 /**
  * @author jjq
  * @version 1.0
@@ -45,7 +47,18 @@ public class BinaryTreeNode<V> {
         this.right = right;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BinaryTreeNode<?> that = (BinaryTreeNode<?>) o;
+        return Objects.equals(value, that.value);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 
     @Override
     public String toString() {
