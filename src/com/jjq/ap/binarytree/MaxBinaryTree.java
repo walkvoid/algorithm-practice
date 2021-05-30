@@ -12,7 +12,8 @@ public class MaxBinaryTree {
     public static int[] SRC_ARRAY = {3,2,1,6,0,5};
 
     public static void main(String[] args) {
-        BinaryTreeNode<Integer> root = buildMaxBinaryTree(SRC_ARRAY);
+        //BinaryTreeNode<Integer> root = buildMaxBinaryTree(SRC_ARRAY);
+        BinaryTreeNode<Integer> root = buildMaxBinaryTree2(SRC_ARRAY);
         System.out.println(root);
     }
 
@@ -24,7 +25,7 @@ public class MaxBinaryTree {
         return root;
     }
 
-    public static void  buildMaxBinaryTree( BinaryTreeNode<Integer> root, int[] arr, int start, int end , int temp) {
+    public static void  buildMaxBinaryTree(BinaryTreeNode<Integer> root, int[] arr, int start, int end , int temp) {
         if (start > end) {
             return;
         }
@@ -43,6 +44,22 @@ public class MaxBinaryTree {
             buildMaxBinaryTree(right, arr,maxIndex+1, end, temp);
         }
 
+    }
+
+    public static BinaryTreeNode<Integer>  buildMaxBinaryTree2(int[] arr) {
+        int temp = 0;
+        return buildMaxBinaryTree2(arr, 0, arr.length-1, temp);
+    }
+
+    public static BinaryTreeNode<Integer>  buildMaxBinaryTree2(int[] arr, int start, int end , int temp) {
+        if (start > end) {
+            return  null;
+        }
+        int maxIndex = maxIndex(arr, start, end, temp);
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(arr[maxIndex], null, null);
+        root.setLeft(buildMaxBinaryTree2(arr, start, maxIndex-1, temp));
+        root.setRight(buildMaxBinaryTree2(arr, maxIndex+1, end, temp));
+        return root;
     }
 
     private static int maxIndex(int[] arr, int start, int end, int temp) {
