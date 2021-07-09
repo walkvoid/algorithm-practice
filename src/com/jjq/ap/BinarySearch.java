@@ -11,8 +11,10 @@ public class BinarySearch {
     public static int[] SRC_ARRAY = {1,3,7,11,15,22,26,34,39,47,50,56,61,69,70};
 
     public static void main(String[] args) {
-        int i = binarySearch(SRC_ARRAY, 55);
+        int i = binarySearch(SRC_ARRAY, 56);
         System.out.println("result:"+ i);
+
+
     }
 
     /**
@@ -27,7 +29,7 @@ public class BinarySearch {
     }
 
     public static int binarySearch(int[] arr, int start, int end, int value) {
-        int mid = (start + end) / 2;
+        int mid = end+(end-start)/2;
         if (arr[mid] == value) {
             return mid;
         }
