@@ -48,7 +48,7 @@ public class SkipList<V extends Comparable> {
         }
         Node p = HEAD;
         while (true) {
-            while (value.compareTo(p=HEAD.right) >= 0) {
+            while (value.compareTo(p.right) > 0) {
                 p = p.right;
             }
             if (p.down == null) {
