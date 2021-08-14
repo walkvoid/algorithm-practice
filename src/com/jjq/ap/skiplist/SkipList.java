@@ -19,7 +19,7 @@ import java.util.Random;
 public class SkipList<V extends Comparable<V>> {
 
 
-    private int level;
+    private volatile int level;
 
     private int size;
 
@@ -88,7 +88,7 @@ public class SkipList<V extends Comparable<V>> {
         while (Math.abs(ran.nextInt())%2 == 0) {
             level++;
         }
-        return level;
+        return level-1>this.level ? this.level+1 : level;
     }
 
     /**
