@@ -18,13 +18,24 @@ public class Q1StackImplQueue {
     public static Stack<Integer> s2 = new Stack<Integer>();
 
 
+    //["CQueue","appendTail","deleteHead","appendTail","appendTail","deleteHead","deleteHead","appendTail","appendTail","appendTail","deleteHead","deleteHead","deleteHead","appendTail","appendTail","deleteHead","deleteHead","deleteHead","appendTail","appendTail","deleteHead"]
+    //[[],[11],[],[1],[17],[],[],[19],[20],[13],[],[],[],[12],[3],[],[],[],[10],[19],[]]
     public static void main(String[] args) {
+
         Q1StackImplQueue q1StackImplQueue = new Q1StackImplQueue();
-        q1StackImplQueue.appendTail(1);
-        q1StackImplQueue.appendTail(2);
-        q1StackImplQueue.appendTail(3);
+        q1StackImplQueue.appendTail(11);
         System.out.println(q1StackImplQueue.toString());
         q1StackImplQueue.deleteHead();
+        System.out.println(q1StackImplQueue.toString());
+        q1StackImplQueue.appendTail(1);
+        q1StackImplQueue.appendTail(17);
+        System.out.println(q1StackImplQueue.toString());
+        q1StackImplQueue.deleteHead();
+        q1StackImplQueue.deleteHead();
+        System.out.println(q1StackImplQueue.toString());
+        q1StackImplQueue.appendTail(19);
+        q1StackImplQueue.appendTail(20);
+        q1StackImplQueue.appendTail(13);
         System.out.println(q1StackImplQueue.toString());
     }
 
@@ -63,13 +74,13 @@ public class Q1StackImplQueue {
             for (int i = 0; i <s2s; i++) {
                 s1.push(s2.pop());
             }
-            Integer pop = s1.pop();
+            Integer res = s1.pop();
 
             int s1s = s1.size();
             for (int i = 0; i <s1s; i++) {
                 s2.push(s1.pop());
             }
-            return pop;
+            return res;
         }
         return -1;
     }
@@ -81,7 +92,7 @@ public class Q1StackImplQueue {
             return s1.toString();
         }
         if (!s2.empty()) {
-            return s1.toString();
+            return s2.toString();
         }
         return "";
     }
