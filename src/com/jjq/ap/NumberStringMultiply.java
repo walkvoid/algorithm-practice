@@ -25,9 +25,34 @@ public class NumberStringMultiply {
      * @param args2
      * @return
      */
-    public static String multiply(String args1, String args2) {
+    public static String multiply(String num1, String num2) {
 
-        return "";
+        if (num1.equals("0") || num2.equals("0")) {
+            return "0";
+        }
+        char[] chars1 = num1.toCharArray();
+        char[] chars2 = num2.toCharArray();
+        int cl1 = chars1.length;
+        int cl2 = chars2.length;
+        char[] result = new char[cl1+cl2];
+        for (int i=cl1-1;i>=0;i--) {
+            int ci = chars1[i] -'0';
+            for (int j=cl2-1;j>=0;j--) {
+                int cj = chars2[j] -'0';
+                result[i+j+1] += ci*cj;
+            }
+        }
+        char[] res = new char[cl1+cl2];
+        for (int r=result.length-1;r>0;r--) {
+            res[r] = (char) ((result[r]%10) + '0');
+            result[r-1] = (char) (result[r]/10 + result[r-1]);
+        }
+        if (result[0] !='\u0000') {
+            res[0] = (char) (result[0] + '0');
+            return new String(res);
+        }else {
+            return new String(res,1,res.length-1);
+        }
 
 
 
