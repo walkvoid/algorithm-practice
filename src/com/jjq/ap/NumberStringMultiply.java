@@ -7,6 +7,10 @@ package com.jjq.ap;
  * @desc 数字字符串乘法
  * 当有两个数都很大的,比如126787164817649837492873423 * 923857907540938705948702398,long型已经会溢出了
  * 此时可以把两个乘数看出字符串处理
+ *
+ * 刷题按照:
+ * - [拉不拉东的算法小抄](https://labuladong.gitee.io/algo/)
+ * - [看云的算法文档](https://www.kancloud.cn/techding/algorithm/2187185)
  */
 public class NumberStringMultiply {
 
