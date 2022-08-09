@@ -18,6 +18,7 @@ public class Dijkstra {
      * @param args
      */
     public static void main(String[] args) {
+
         RoadGraph roadGraph = new RoadGraph(9, 9);
         roadGraph.buildGraph();
         int[] route = calcShortestRoute(0, roadGraph);
