@@ -9,38 +9,70 @@ package com.jjq.ap.list;
 public class ReverseLinkedList {
 
     /**
-     * 递归方式反转列表
+     *
      * @param head
      * @return 5->4->3->2->1   1->2->3->4->5
-     * 5->4->3->2->1  =>  3->2->1 4->5
+     * 5->4->3->2->1  => null<-5<-4<-3<-2<-1
      *
      */
-    public ListNode reverseList(ListNode head) {
-        if (head.next == null) {
-
-        } else {
-            ListNode tempNode = head.next.next;
-            head.next = head;
+    public static ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
         }
-
-        return null;
+        return pre;
     }
 
     /**
-     *
+     * 自己琢磨的
      * @param head
      * @return
-     * 5->4->3->2->1  =>  3->2->1 4->5
+     * 5->4->3->2->1
+     * 4->3->2->1 5
+     * 3->2->1 4->5
+     * ......
      */
     public static ListNode reverseList2(ListNode head) {
         ListNode waitReHead = head;
-        ListNode tempHead = head;
-        while (waitReHead != null && waitReHead.next != null) {
-            tempHead = waitReHead.next;
-            tempHead.next = waitReHead;
-            waitReHead = waitReHead.next.next;
+        ListNode tempHead = null;
+        while (waitReHead != null) {
+            ListNode temp = waitReHead;
+            waitReHead = waitReHead.next;
+            temp.next = null;
+            if (tempHead == null) {
+                tempHead = temp;
+            } else {
+                temp.next = tempHead;
+                tempHead = temp;
+            }
         }
         return tempHead;
+    }
+
+    /**
+     * 递归方法
+     */
+    public static ListNode reverseList3(ListNode head) {
+        return reverse(null, head);
+    }
+
+    /**
+     * 递归方法
+     *
+     * 1<-2<-3<-4<-5
+     *        pre<-cur  pre->cur
+     */
+    public static ListNode reverse(ListNode pre, ListNode cur) {
+        if (cur == null) {
+            return pre;
+        }
+        ListNode next = cur.next;
+        cur.next = pre;
+        return reverse(cur, next);
     }
 
     public static void main(String[] args) {
@@ -49,7 +81,7 @@ public class ReverseLinkedList {
         ListNode node3 = new ListNode(3, node2);
         ListNode node4 = new ListNode(4, node3);
         ListNode node5 = new ListNode(5, node4);
-        ListNode listNode = reverseList2(node5);
+        ListNode listNode = reverseList3(node5);
         System.out.println(listNode);
 
 
