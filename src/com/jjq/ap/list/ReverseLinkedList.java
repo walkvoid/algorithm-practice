@@ -43,12 +43,10 @@ public class ReverseLinkedList {
             ListNode temp = waitReHead;
             waitReHead = waitReHead.next;
             temp.next = null;
-            if (tempHead == null) {
-                tempHead = temp;
-            } else {
+            if (tempHead != null) {
                 temp.next = tempHead;
-                tempHead = temp;
             }
+            tempHead = temp;
         }
         return tempHead;
     }
