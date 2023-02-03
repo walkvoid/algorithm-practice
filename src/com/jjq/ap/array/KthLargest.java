@@ -11,10 +11,12 @@ public class KthLargest {
 
     public static void main(String[] args) {
         //int[] nums = {3,2,3,1,2,4,5,5,6};
-        int[] nums = {4,3,7,1,5,2,6};
-        int k = 3;
-        int kthLargest = findKthLargest(nums, k);
-        System.out.println("findKthLargest,result:" + kthLargest);
+        int[] nums = {3,2,1,5,6,4};
+        //int[] nums = {4,3,7,1,5,2,6}; //[3,2,1,5,6,4], k = 2
+        int k = 2;
+        int kthLargestIndex = findKthLargest(nums, k);
+        int kthLargestValue = nums[kthLargestIndex];
+        System.out.println("findKthLargest,index:" + kthLargestIndex +",value:"+ kthLargestValue);
 
     }
 
@@ -43,16 +45,12 @@ public class KthLargest {
         int pivot = calcPivot(nums, start, end);
         if (pivot + 1 == k) {
             return pivot;
+        } else if(pivot + 1 > k) {
+            return find(nums, k, start, pivot-1);
+        } else  {
+            //(pivot + 1 < k)
+            return find(nums, k, pivot + 1, end);
         }
-        //首次调用后：[5, 6, 7，4，2, 1, 3]
-        if(pivot + 1 > k) {
-            find(nums, k, start, pivot-1);
-        }
-
-        if(pivot + 1 < k) {
-            find(nums, k-pivot-1, pivot + 1, end);
-        }
-        return -1;
     }
 
     /**
@@ -66,7 +64,7 @@ public class KthLargest {
         int ref = arr[start];
         while (start < end) {
             //从数组尾部开始比较，直到找到第一个比参照值ref大的
-            while (arr[end] <= ref) {
+            while (start < end && arr[end] <= ref) {
                 end--;
             }
             //退出循环，end此时指向比ref小的值下标,将这个值交换到前面去
@@ -76,7 +74,7 @@ public class KthLargest {
             }
 
             //类似的，从数组头部开始比较，直到找到第一个比参照值ref小的
-            while (start< end && arr[start] >= ref){
+            while (start< end && arr[start] > ref){
                 start++;
             }
             if (start < end) {
