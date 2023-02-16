@@ -7,6 +7,8 @@ package com.jjq.ap.array;
  * @desc 等分数组的子集
  * 给你一个 只包含正整数 的 非空 数组 nums 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
  * https://leetcode.cn/problems/partition-equal-subset-sum/
+ *
+ * 代码随想录：https://programmercarl.com/%E8%83%8C%E5%8C%85%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%8001%E8%83%8C%E5%8C%85-1.html
  */
 public class PartitionEqualSubset {
 
@@ -17,8 +19,9 @@ public class PartitionEqualSubset {
     }
 
     /**
-     * dp[j]:能否凑出总和为j的情况，不能=0，能=1
-     * 如果dp[j-num[i]] 为1， dp[j]一定等于1
+     * dp[j]表示，容量为j的背包能装的最大质量
+     * 从dp[j-nums[i]) => dp[j]
+     * dp[j-nums[i]) + nums[i] = dp[j]
      * @param nums
      * @return
      */
@@ -35,8 +38,8 @@ public class PartitionEqualSubset {
         }
         int half = sum / 2;
         int[] dp = new int[half+1];
+        dp[0] = 0;
         for (int i = 0; i < nums.length; i++) {
-
             for (int j = half; j >= nums[i]; j--) {
                 dp[j] = Math.max(dp[j], dp[j-nums[i]]+ nums[i]);
             }
