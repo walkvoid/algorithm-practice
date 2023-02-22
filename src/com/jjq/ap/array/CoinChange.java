@@ -1,10 +1,12 @@
 package com.jjq.ap.array;
 
+import java.util.Arrays;
+
 /**
  * @author jiangjunqing
  * @version 1.0.0
- * @date 2023/2/8
- * @desc 零钱问题 https://leetcode.cn/problems/coin-change
+ * @date 2023/2/8 2023/2/22
+ * @desc 零钱问题 https://leetcode.cn/problems/coin-change 322
  * 给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。
  * 计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回-1 。
  * 你可以认为每种硬币的数量是无限的。
@@ -14,10 +16,35 @@ package com.jjq.ap.array;
 public class CoinChange {
 
     public static void main(String[] args) {
-        int[] coins = {2};
-        int amount = 3;
-        int i = coinChange(coins, amount);
+        int[] coins = {2}; int amount = 3; // -1
+        //int[] coins = {1,2,5}; int amount = 11; // 3
+
+        int i = coinChange2(coins, amount);
         System.out.println("result:" + i);
+    }
+
+    /**
+     * dp[i]: 凑成总金额为i的最少硬币数
+     * 已知dp[i-nums[j]] 则dp[i] = dp[i-nums[j]] +1
+     * 需要注意：dp[i-nums[j]]等于初始值Integer.MAX_VALUE（无法凑成），那么dp[i]也跳过（无法凑成）
+     * @param coins
+     * @param amount
+     * @return
+     */
+    public static int coinChange2(int[] coins, int amount) {
+        int[] dp = new int[amount+1];
+        //初始化为最大值
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        for (int j = 0; j < coins.length; j++) {
+            for (int i = coins[j]; i <= amount; i++) {
+                if (dp[i-coins[j]] == Integer.MAX_VALUE) {
+                    continue;
+                }
+                dp[i] = Math.min(dp[i-coins[j]] + 1, dp[i]);
+            }
+        }
+        return dp[amount] == Integer.MAX_VALUE ? -1: dp[amount];
     }
 
     /**
