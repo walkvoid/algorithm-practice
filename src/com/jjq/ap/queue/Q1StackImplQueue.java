@@ -1,4 +1,4 @@
-package com.jjq.ap.sword2offer;
+package com.jjq.ap.queue;
 
 import java.util.Stack;
 

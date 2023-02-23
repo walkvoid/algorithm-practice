@@ -1,31 +1,32 @@
-package com.jjq.ap.binarytree;
+package com.jjq.ap.tree;
+
+
+import com.jjq.ap.binarytree.Person;
 
 /**
- * @author jjq
- * @version 1.0
- * @date 2021/4/13
- * @desc 遍历树
+ * @author jiangjunqing
+ * @version v1.0.0
+ * @date 2023/2/23
+ * @desc 计算二叉树的最大深度  https://leetcode.cn/problems/maximum-depth-of-binary-tree/ 104
  */
-public class TraverseTree {
+public class CalcTreeMaxDepth {
 
     public static void main(String[] args) {
-        BinaryTreeNode<Person> root = buildSanguoTree();
-        traverse(root);
+        int i = calcTreeMaxDepth0(buildSanguoTree());
+        System.out.println("result: " + i);
     }
 
+    public static int calcTreeMaxDepth() {
+        return 0;
+    }
 
-    /**
-     * 前/中/后序遍历树,取决于root被遍历的顺序
-     * @param root
-     */
-    public static void traverse(BinaryTreeNode<Person> root) {
-        if (root.getLeft() !=null) {
-            traverse(root.getLeft());
+    public static int calcTreeMaxDepth0(BinaryTreeNode root) {
+        if (root == null) {
+            return 0;
         }
-        System.out.println(root.getValue().getName());
-        if (root.getRight() !=null) {
-            traverse(root.getRight());
-        }
+        int rightDepth = calcTreeMaxDepth0(root.getRight());
+        int leftDepth  = calcTreeMaxDepth0(root.getLeft());
+        return 1 + Math.max(rightDepth, leftDepth);
     }
 
 
@@ -39,7 +40,7 @@ public class TraverseTree {
      *       关银儿
      *
      */
-    public static  BinaryTreeNode<Person> buildSanguoTree() {
+    public static BinaryTreeNode<Person> buildSanguoTree() {
         Person liubei = new Person("刘备", 100);
         Person guanyu = new Person("关羽", 98);
         Person zhangfei = new Person("张飞", 97);

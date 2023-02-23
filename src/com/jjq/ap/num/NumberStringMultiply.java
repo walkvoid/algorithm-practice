@@ -1,4 +1,4 @@
-package com.jjq.ap;
+package com.jjq.ap.num;
 
 /**
  * @author jjq

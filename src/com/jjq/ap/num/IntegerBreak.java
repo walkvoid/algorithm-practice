@@ -3,7 +3,7 @@ package com.jjq.ap.num;
 /**
  * @author jiangjunqing
  * @version 1.0.0
- * @date 2023/2/7
+ * @date 2023/2/7  2023/2/23
  * @desc 给定一个正整数 n ，将其拆分为 k 个 正整数 的和（ k >= 2 ），并使这些整数的乘积最大化。
  * 返回 你可以获得的最大乘积 。
  * https://leetcode.cn/problems/integer-break/
@@ -17,8 +17,26 @@ public class IntegerBreak {
      * @param args
      */
     public static void main(String[] args) {
-        int i = integerBreak(10);
+        int i = integerBreak2(10);
         System.out.println("result:"+ i);
+    }
+
+    /**
+     * dp[i]:正整数的i的最大乘积
+     * 已知dp[j]，dp[i] = dp[i-j] * (i-j)
+     * @param n
+     * @return
+     */
+    public static int integerBreak2(int n) {
+        int[] dp = new int[n+1];
+        dp[1]=1;
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                dp[i] = Math.max(dp[i], (i-j)*j);
+                dp[i] = Math.max(dp[i], (i-j)*dp[j]);
+            }
+        }
+        return dp[n];
     }
 
     /**
